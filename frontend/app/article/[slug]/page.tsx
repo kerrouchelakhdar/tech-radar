@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import AdUnit from '@/components/AdUnit'
 import InArticleAd from '@/components/InArticleAd'
+import AdsterraBanner from '@/components/AdsterraBanner'
+import AdsterraBanner from '@/components/AdsterraBanner'
 
 export const revalidate = 3600
 
@@ -124,6 +126,9 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Top Ad */}
           <AdUnit slot="article-top" />
+
+          {/* Adsterra Banner */}
+          <AdsterraBanner className="my-8" />
 
           {/* Description */}
           <div className="prose prose-lg max-w-none mb-10 animate-fade-in-up animation-delay-500">

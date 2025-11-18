@@ -4,6 +4,7 @@ import { getArticles, type Article } from '@/lib/supabase'
 import Link from 'next/link'
 import Image from 'next/image'
 import AdUnit from '@/components/AdUnit'
+import AdsterraBanner from '@/components/AdsterraBanner'
 import { useState, useEffect } from 'react'
 
 const categories = [
@@ -134,6 +135,9 @@ export default function HomePage() {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
+        {/* Adsterra Banner - Top */}
+        <AdsterraBanner className="mb-8" />
+
         <AdUnit slot="top-banner" />
 
         {/* Search Results Info */}

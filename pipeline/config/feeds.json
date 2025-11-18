@@ -1,0 +1,108 @@
+{
+  "feeds": [
+    {
+      "url": "https://techcrunch.com/feed/",
+      "category": "AI & Machine Learning",
+      "priority": 1,
+      "name": "TechCrunch"
+    },
+    {
+      "url": "https://www.theverge.com/rss/index.xml",
+      "category": "Mobile Development",
+      "priority": 2,
+      "name": "The Verge"
+    },
+    {
+      "url": "https://hnrss.org/frontpage",
+      "category": "Web Development",
+      "priority": 1,
+      "name": "Hacker News"
+    },
+    {
+      "url": "https://dev.to/feed",
+      "category": "Web Development",
+      "priority": 1,
+      "name": "Dev.to"
+    },
+    {
+      "url": "https://dev.to/feed/tag/ai",
+      "category": "AI & Machine Learning",
+      "priority": 2,
+      "name": "Dev.to AI"
+    },
+    {
+      "url": "https://github.blog/feed/",
+      "category": "Cloud & DevOps",
+      "priority": 1,
+      "name": "GitHub Blog"
+    },
+    {
+      "url": "https://css-tricks.com/feed/",
+      "category": "Web Development",
+      "priority": 2,
+      "name": "CSS-Tricks"
+    },
+    {
+      "url": "https://www.smashingmagazine.com/feed/",
+      "category": "Web Development",
+      "priority": 1,
+      "name": "Smashing Magazine"
+    },
+    {
+      "url": "https://www.freecodecamp.org/news/rss/",
+      "category": "Web Development",
+      "priority": 2,
+      "name": "freeCodeCamp"
+    },
+    {
+      "url": "https://thenewstack.io/feed/",
+      "category": "Cloud & DevOps",
+      "priority": 1,
+      "name": "The New Stack"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/feed/",
+      "category": "Cybersecurity",
+      "priority": 1,
+      "name": "BleepingComputer"
+    },
+    {
+      "url": "https://krebsonsecurity.com/feed/",
+      "category": "Cybersecurity",
+      "priority": 2,
+      "name": "Krebs on Security"
+    },
+    {
+      "url": "https://towardsdatascience.com/feed",
+      "category": "Data Science",
+      "priority": 1,
+      "name": "Towards Data Science"
+    },
+    {
+      "url": "https://www.kdnuggets.com/feed",
+      "category": "Data Science",
+      "priority": 2,
+      "name": "KDnuggets"
+    },
+    {
+      "url": "https://blog.google/technology/ai/rss/",
+      "category": "AI & Machine Learning",
+      "priority": 1,
+      "name": "Google AI Blog"
+    }
+  ],
+  "categories": [
+    "AI & Machine Learning",
+    "Web Development",
+    "Cloud & DevOps",
+    "Mobile Development",
+    "Cybersecurity",
+    "Data Science"
+  ],
+  "rate_limits": {
+    "max_articles_per_run": 10,
+    "max_per_category_per_hour": 2,
+    "min_article_age_hours": 0,
+    "max_article_age_hours": 72
+  }
+}

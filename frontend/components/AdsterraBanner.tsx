@@ -8,42 +8,38 @@ interface AdsterraBannerProps {
 
 export default function AdsterraBanner({ className = '' }: AdsterraBannerProps) {
   const bannerRef = useRef<HTMLDivElement>(null)
-  const scriptLoadedRef = useRef(false)
+  const scriptAddedRef = useRef(false)
 
   useEffect(() => {
-    if (scriptLoadedRef.current || !bannerRef.current) return
+    if (scriptAddedRef.current || !bannerRef.current) return
 
     try {
-      // Adsterra configuration
-      const atOptions = {
-        key: '0e6fddea93ae128a932a17ebaaf6bcb4',
-        format: 'iframe',
-        height: 90,
-        width: 728,
-        params: {},
-      }
+      // Create config script first
+      const configScript = document.createElement('script')
+      configScript.type = 'text/javascript'
+      configScript.innerHTML = `
+        atOptions = {
+          'key' : '0e6fddea93ae128a932a17ebaaf6bcb4',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      `
+      
+      // Create invoke script
+      const invokeScript = document.createElement('script')
+      invokeScript.type = 'text/javascript'
+      invokeScript.src = '//www.highperformanceformat.com/0e6fddea93ae128a932a17ebaaf6bcb4/invoke.js'
+      invokeScript.async = true
 
-      // Inject config into window
-      ;(window as any).atOptions = atOptions
-
-      // Load Adsterra script
-      const script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.src = `//www.highperformanceformat.com/${atOptions.key}/invoke.js`
-      script.async = true
-
-      bannerRef.current.appendChild(script)
-      scriptLoadedRef.current = true
+      // Append both scripts
+      bannerRef.current.appendChild(configScript)
+      bannerRef.current.appendChild(invokeScript)
+      
+      scriptAddedRef.current = true
     } catch (error) {
-      console.error('Adsterra banner load error:', error)
-    }
-
-    // Cleanup
-    return () => {
-      if (bannerRef.current) {
-        bannerRef.current.innerHTML = ''
-      }
-      scriptLoadedRef.current = false
+      console.error('Adsterra banner error:', error)
     }
   }, [])
 

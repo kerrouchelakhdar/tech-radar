@@ -6,7 +6,6 @@ import './globals.css'
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Tech Radar'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tech-radar.vercel.app'
 const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-const monetagMeta = process.env.NEXT_PUBLIC_MONETAG_META
 const adsterraSrc = process.env.NEXT_PUBLIC_ADSTERRA_SRC
 const adsterraInline = process.env.NEXT_PUBLIC_ADSTERRA_SNIPPET
 const adsterraLocal = process.env.NEXT_PUBLIC_ADSTERRA_LOCAL // e.g. "/adsterra.js"
@@ -68,8 +67,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Monetag site verification */}
-        {monetagMeta && <meta name="monetag" content={monetagMeta} />}
+        {/* Monetag site verification (hardcoded as requested) */}
+        <meta name="monetag" content="64740fd2e7a205a2692db03557ba2c22" />
 
         {/* Google AdSense (optional) */}
         {adsenseClient && (

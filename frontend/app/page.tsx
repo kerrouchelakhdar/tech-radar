@@ -184,7 +184,7 @@ export default function HomePage() {
                 </div>
               </Link>
 
-              {(idx + 1) % 6 === 0 &&
+              {(idx + 1) % 3 === 0 &&
                 (
                   <div className="md:col-span-2 lg:col-span-3 my-8">
                     <AdsterraInline />

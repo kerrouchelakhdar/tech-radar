@@ -21,7 +21,7 @@ def get_og_image(url: str) -> Optional[str]:
             return og_image['content']
         
         # Try twitter:image
-        tw_image = soup.find('meta', name='twitter:image')
+        tw_image = soup.find('meta', attrs={'name': 'twitter:image'})
         if tw_image and tw_image.get('content'):
             return tw_image['content']
         

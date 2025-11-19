@@ -22,5 +22,5 @@ def load_config():
         'supabase_url': os.getenv('SUPABASE_URL'),
         'supabase_key': os.getenv('SUPABASE_KEY'),
         'revalidate_secret': os.getenv('REVALIDATE_SECRET'),
-        'revalidate_url': os.getenv('REVALIDATE_URL', 'https://tech-radar.vercel.app/api/revalidate')
+        'revalidate_url': os.getenv('REVALIDATE_URL', 'https://tech-radar-six.vercel.app/api/revalidate')
     }

@@ -2,6 +2,7 @@ from typing import List, Dict, Optional
 from bs4 import BeautifulSoup
 import re
 import sys
+import requests
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -30,6 +31,44 @@ def clean_html(html: str) -> str:
     # Clean extra whitespace
     text = re.sub(r'\s+', ' ', text)
     return text.strip()
+
+def fetch_article_content(url: str) -> Optional[str]:
+    """Fetch full article content from URL if RSS is incomplete"""
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code != 200:
+            return None
+            
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Remove unwanted elements
+        for tag in soup(['script', 'style', 'nav', 'header', 'footer', 'aside', 'iframe', 'form', 'noscript']):
+            tag.decompose()
+            
+        # Try to find the main article content
+        # 1. <article> tag
+        article = soup.find('article')
+        if article:
+            return str(article)
+            
+        # 2. Common class names
+        for class_name in ['entry-content', 'post-content', 'article-body', 'content', 'main-content', 'story-body']:
+            content = soup.find(class_=class_name)
+            if content:
+                return str(content)
+                
+        # 3. <main> tag
+        main = soup.find('main')
+        if main:
+            return str(main)
+            
+        return None
+    except Exception as e:
+        print(f"[stage3] error fetching article from {url}: {e}")
+        return None
 
 def sanitize_html(html: str) -> str:
     """Sanitize and keep basic structure (p, headings, lists, links)."""
@@ -169,6 +208,14 @@ def transform_entry(entry: Dict) -> Dict:
 
     # Prefer full HTML if available
     full_html = extract_full_html(entry)
+
+    # If RSS content is short/missing, try fetching from source
+    if not full_html or len(full_html) < 1000:
+        print(f"[stage3] fetching full content for: {title[:30]}...")
+        fetched_html = fetch_article_content(entry['source_url'])
+        if fetched_html and len(fetched_html) > len(full_html or ''):
+            full_html = fetched_html
+
     content_html = sanitize_html(full_html) if full_html else ''
 
     # If no full HTML, use a paragraph from cleaned description

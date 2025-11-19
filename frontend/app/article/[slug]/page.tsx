@@ -125,15 +125,15 @@ export default async function ArticlePage({ params }: Props) {
           {/* Top Ad - Adsterra */}
           <AdsterraInline />
 
-          {/* Adsterra Banner */}
-          <AdsterraInline />
-
           {/* Description */}
           <div className="prose prose-lg max-w-none mb-10 animate-fade-in-up animation-delay-500">
             <p className="text-2xl text-gray-700 leading-relaxed font-medium border-l-4 border-indigo-600 pl-6 py-2 bg-gradient-to-r from-indigo-50 to-transparent rounded-r-lg">
               {article.description}
             </p>
           </div>
+
+          {/* Adsterra Banner */}
+          <AdsterraInline />
 
           {/* In-Article Ad */}
           <InArticleAd />

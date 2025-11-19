@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation'
 import AdUnit from '@/components/AdUnit'
 import InArticleAd from '@/components/InArticleAd'
 import AdsterraBanner from '@/components/AdsterraBanner'
-import AdsterraBanner from '@/components/AdsterraBanner'
 
 export const revalidate = 3600
 

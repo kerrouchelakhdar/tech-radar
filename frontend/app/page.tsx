@@ -4,6 +4,7 @@ import { getArticles, type Article } from '@/lib/supabase'
 import Link from 'next/link'
 import Image from 'next/image'
 import AdsterraInline from '@/components/AdsterraInline'
+import AdsterraSquare from '@/components/AdsterraSquare'
 import { useState, useEffect } from 'react'
 
 const categories = [
@@ -136,6 +137,7 @@ export default function HomePage() {
       <main className="container mx-auto px-4 py-8">
         {/* Adsterra Banner - Top */}
         <AdsterraInline />
+        <AdsterraSquare />
         {/* Search Results Info */}
         {searchQuery && (
           <div className="mb-6 animate-fade-in">
@@ -186,8 +188,9 @@ export default function HomePage() {
 
               {(idx + 1) % 3 === 0 &&
                 (
-                  <div className="md:col-span-2 lg:col-span-3 my-8">
+                  <div className="md:col-span-2 lg:col-span-3 my-8 flex flex-col items-center gap-4">
                     <AdsterraInline />
+                    <AdsterraSquare />
                   </div>
                 )
               }

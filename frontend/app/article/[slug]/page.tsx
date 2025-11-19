@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import InArticleAd from '@/components/InArticleAd'
 import AdsterraInline from '@/components/AdsterraInline'
+import AdsterraSquare from '@/components/AdsterraSquare'
 
 export const revalidate = 3600
 
@@ -124,6 +125,7 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Top Ad - Adsterra */}
           <AdsterraInline />
+          <AdsterraSquare />
 
           {/* Description */}
           <div className="prose prose-lg max-w-none mb-10 animate-fade-in-up animation-delay-500">
@@ -134,6 +136,7 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Adsterra Banner */}
           <AdsterraInline />
+          <AdsterraSquare />
 
           {/* In-Article Ad */}
           <InArticleAd />
@@ -194,8 +197,9 @@ export default async function ArticlePage({ params }: Props) {
           )}
 
           {/* Bottom Ad - Adsterra */}
-          <div className="mt-16">
+          <div className="mt-16 flex flex-col items-center gap-4">
             <AdsterraInline />
+            <AdsterraSquare />
           </div>
         </article>
 

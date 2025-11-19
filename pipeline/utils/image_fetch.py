@@ -24,8 +24,52 @@ def get_og_image(url: str) -> Optional[str]:
         tw_image = soup.find('meta', attrs={'name': 'twitter:image'})
         if tw_image and tw_image.get('content'):
             return tw_image['content']
+            
+        # Try largest image by area (width * height) or just width if height missing
+        # This is better than just width > 400
+        images = soup.find_all('img')
+        best_img = None
+        max_area = 0
         
-        # Try first large image
+        for img in images:
+            src = img.get('src')
+            if not src or src.startswith('data:') or 'avatar' in src or 'logo' in src or 'icon' in src:
+                continue
+                
+            # Check for srcset and pick the largest
+            srcset = img.get('srcset')
+            if srcset:
+                # Parse srcset: "url 1000w, url 500w"
+                try:
+                    candidates = []
+                    for part in srcset.split(','):
+                        parts = part.strip().split()
+                        if len(parts) == 2 and parts[1].endswith('w'):
+                            width = int(parts[1][:-1])
+                            candidates.append((width, parts[0]))
+                    if candidates:
+                        candidates.sort(key=lambda x: x[0], reverse=True)
+                        src = candidates[0][1]
+                except:
+                    pass
+
+            # Heuristic for size
+            try:
+                width = int(img.get('width', 0))
+                height = int(img.get('height', 0))
+                area = width * height
+                if area > max_area and width > 400:
+                    max_area = area
+                    best_img = src
+                elif width > 600 and not best_img: # Fallback if height is missing but width is good
+                     best_img = src
+            except:
+                continue
+                
+        if best_img:
+            return best_img
+        
+        # Try first large image (legacy check)
         img = soup.find('img', width=lambda w: w and int(w) > 400)
         if img and img.get('src'):
             return img['src']

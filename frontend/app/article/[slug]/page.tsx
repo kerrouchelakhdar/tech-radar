@@ -2,9 +2,8 @@ import { getArticleBySlug, type Article } from '@/lib/supabase'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import AdUnit from '@/components/AdUnit'
 import InArticleAd from '@/components/InArticleAd'
-import AdsterraBanner from '@/components/AdsterraBanner'
+import AdsterraInline from '@/components/AdsterraInline'
 
 export const revalidate = 3600
 
@@ -123,11 +122,11 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           )}
 
-          {/* Top Ad */}
-          <AdUnit slot="article-top" />
+          {/* Top Ad - Adsterra */}
+          <AdsterraInline />
 
           {/* Adsterra Banner */}
-          <AdsterraBanner className="my-8" />
+          <AdsterraInline />
 
           {/* Description */}
           <div className="prose prose-lg max-w-none mb-10 animate-fade-in-up animation-delay-500">
@@ -194,8 +193,10 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           )}
 
-          {/* Bottom Ad */}
-          <AdUnit slot="article-bottom" className="mt-16" />
+          {/* Bottom Ad - Adsterra */}
+          <div className="mt-16">
+            <AdsterraInline />
+          </div>
         </article>
 
         {/* Footer */}

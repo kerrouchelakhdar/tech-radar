@@ -3,8 +3,7 @@
 import { getArticles, type Article } from '@/lib/supabase'
 import Link from 'next/link'
 import Image from 'next/image'
-import AdUnit from '@/components/AdUnit'
-import AdsterraBanner from '@/components/AdsterraBanner'
+import AdsterraInline from '@/components/AdsterraInline'
 import { useState, useEffect } from 'react'
 
 const categories = [
@@ -136,10 +135,7 @@ export default function HomePage() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Adsterra Banner - Top */}
-        <AdsterraBanner className="mb-8" />
-
-        <AdUnit slot="top-banner" />
-
+        <AdsterraInline />
         {/* Search Results Info */}
         {searchQuery && (
           <div className="mb-6 animate-fade-in">
@@ -188,7 +184,13 @@ export default function HomePage() {
                 </div>
               </Link>
 
-              {(idx + 1) % 6 === 0 && <AdUnit slot={`feed-${idx}`} />}
+              {(idx + 1) % 6 === 0 &&
+                (
+                  <div className="md:col-span-2 lg:col-span-3 my-8">
+                    <AdsterraInline />
+                  </div>
+                )
+              }
             </div>
           ))}
         </div>
@@ -207,8 +209,6 @@ export default function HomePage() {
             </button>
           </div>
         )}
-
-        <AdUnit slot="bottom-banner" className="mt-12" />
       </main>
 
       {/* Footer */}
@@ -254,3 +254,4 @@ export default function HomePage() {
     </div>
   )
 }
+

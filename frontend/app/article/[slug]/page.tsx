@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import InArticleAd from '@/components/InArticleAd'
 import AdsterraInline from '@/components/AdsterraInline'
 import AdsterraSquare from '@/components/AdsterraSquare'
+import SocialShare from '@/components/SocialShare'
 
 export const revalidate = 3600
 
@@ -107,6 +108,12 @@ export default async function ArticlePage({ params }: Props) {
               })}
             </time>
           </div>
+
+          {/* Social Share */}
+          <SocialShare 
+            url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://tech-radar.vercel.app'}/article/${article.slug}`} 
+            title={article.title} 
+          />
 
           {/* Featured Image */}
           {article.image_url && (

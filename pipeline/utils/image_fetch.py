@@ -9,7 +9,8 @@ def get_og_image(url: str) -> Optional[str]:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
-        resp = requests.get(url, headers=headers, timeout=5)
+        # Increased timeout to 10s and added specific exception handling
+        resp = requests.get(url, headers=headers, timeout=10)
         if resp.status_code != 200:
             return None
         
@@ -74,6 +75,9 @@ def get_og_image(url: str) -> Optional[str]:
         if img and img.get('src'):
             return img['src']
         
+        return None
+    except requests.exceptions.Timeout:
+        # Silently ignore timeouts or log as warning if needed
         return None
     except Exception as e:
         print(f'[image] error fetching from {url[:50]}: {e}')

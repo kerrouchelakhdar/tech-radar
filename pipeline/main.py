@@ -43,6 +43,7 @@ def pipeline():
         print('[pipeline] No new articles published.')
     
     print('[pipeline] Done.')
+    return inserted
 
 if __name__ == '__main__':
     pipeline()
